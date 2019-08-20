@@ -7,11 +7,10 @@ services:
             - flask
         volumes:
 #            - ./nginx.conf:/etc/nginx/conf.d/default.conf
-            - ../../../letsencrypt-docker-nginx/src/production://usr/share/nginx/html
+            - ../production:/usr/share/nginx/html
             - ./production.conf:/etc/nginx/conf.d/default.conf
-            - ./dh-param/dhparam-2048.pem:/etc/ssl/certs/dhparam-2048.pem
-            - ./docker-volumes/etc/letsencrypt/live/bl4ckb0x.ddnss.de/fullchain.pem:/etc/letsencrypt/bl4ckb0x.ddnss.de/fullchain.pem
-            - ./docker-volumes/etc/letsencrypt/live/bl4ckb0x.ddnss.de/privkey.pem:/etc/letsencrypt/live/bl4ckb0x.ddnss.de/privkey.pem
+            - /letsencrypt-docker-nginx/src/dhparam/dhparam-2048.pem:/etc/ssl/certs/dhparam-2048.pem
+            - /docker-volumes/etc/letsencrypt/:/etc/letsencrypt/
         networks:
             - my-network
         ports:
