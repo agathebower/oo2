@@ -1,0 +1,31 @@
+server {
+    listen 80;
+    server_name bl4ckb0x.ddnss.de;
+
+    location ^~ /.well-known {
+        allow all;
+        root /data/letsencrypt/;
+    }
+
+    location / {
+        proxy_pass http://flask:5000/;
+        proxy_set_header Host "localhost";
+    }
+
+
+}
+
+server {
+#    listen 443 ssl; # managed by Certbot
+    listen 443 default_server;
+    server_name bl4ckb0x.ddnss.de;
+
+    ssl_on;
+    ssl_certificate /etc/letsencrypt/live/bl4ckb0x.ddnss.de/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/bl4ckb0x.ddnss.de/privkey.pem; # managed by Certbot
+#    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+#    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+#    return 404; # managed by Certbot
+
+}
